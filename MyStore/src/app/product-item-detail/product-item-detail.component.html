@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="detail-container">
+    <div>
+      <img src="{{ product.url }}" alt="..." height="250px" />
+    </div>
+    <div class="detail-item">
+      <h2>{{ product.name }}</h2>
+      <p>{{ product.description }}</p>
+      <p>{{ product.price | currency: "USD" }}</p>
+      <form (ngSubmit)="onSubmit(product)">
+        <select class="select-input" [(ngModel)]="selectedItem" style="width: 100px" class="form-select" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
+          <option *ngFor="let value of productCount" value="{{ value }}">
+            {{ value }}
+          </option>
+        </select>
+        <input [ngStyle]="{'margin': '10px 0px 5px 0px'}" type="submit" (click)="addToCart(product)" value="Add to Cart" class="btn btn-primary" />
+      </form>
+      <p class="back-link">
+          <a routerLink="/">&lt; Back to product list</a>
+      </p>
+    </div>
+  </div>
+</div>

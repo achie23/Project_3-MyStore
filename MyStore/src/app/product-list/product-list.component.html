@@ -1,0 +1,8 @@
+<div class="container-fluid">
+  <h1 class="page-header">List of Products</h1>
+  <div class="product-container">
+    <div class="product-index">
+      <app-product-item *ngFor="let product of productsList" [productItem]="product"></app-product-item>
+    </div>
+  </div>
+</div>

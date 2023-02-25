@@ -1,0 +1,19 @@
+<div class="product-container">
+  <div class="card" [ngStyle]="{'margin-bottom': '30px'}">
+    <a routerLink="/product-detail/{{ productItem.id }}">
+      <img class="product-image" src="{{ productItem.url }}" alt="..." height="250px"/>
+    </a>
+    <div class="card-body">
+      <h6 class="card-title row alignCenter">{{ productItem.name }}</h6>
+      <p class="card-text row alignCenter">${{ productItem.price }}</p>
+      <form (ngSubmit)="onSubmit(productItem)" class="row alignCenter">
+        <select [(ngModel)]="selectedItem" style="width: 100px" class="form-select select-input" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
+          <option *ngFor="let value of productCount" value="{{ value }}">
+            {{ value }}
+          </option>
+        </select>
+        <input type="submit" (click)="addToCart(productItem)" value="Add to Cart" class="btn btn-primary" />
+    </form>
+    </div>
+  </div>
+</div>
