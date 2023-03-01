@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Product } from 'src/model/Product';
 import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
@@ -10,6 +10,7 @@ import { CartService } from '../services/cart.service';
 })
 export class ProductItemComponent implements OnInit {
   @Input() productItem!: Product;
+  @Output() messageData: EventEmitter<string> = new EventEmitter();
   selectedItem: string = '1';
   productCount: string[] = ['1', '2', '3', '4', '5'];
   allProducts: Product[] = [];
@@ -44,7 +45,7 @@ export class ProductItemComponent implements OnInit {
 
   onSubmit(product: Product): void {
     const message = `${product.name} has been added to your cart.`;
-    alert(message);
+    this.messageData.emit(message);
   }
 
 }

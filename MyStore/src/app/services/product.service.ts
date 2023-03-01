@@ -8,7 +8,7 @@ import { Product } from 'src/model/Product';
 })
 export class ProductService {
   myStorage = window.localStorage;
-  private apiUrl = '../../assets/data.json';
+  private apiUrl: string = '../../assets/data.json';
 
   constructor(private http: HttpClient) { }
 

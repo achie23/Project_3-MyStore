@@ -22,7 +22,7 @@
                 {{ option }}
               </option>
             </select>
-            <button (click)="deletedItem(order.id)" class="btn btn-primary mt-2">Remove</button>
+            <button (click)="deleteItem(order.id)" class="btn btn-primary mt-2">Remove</button>
           </div>
         </div>
       </div>
@@ -39,12 +39,10 @@
           </p>
           <p>
             <label>Credit Card Number</label><br />
-            <input type="text" name="creditCardNumber" required minlength="16" maxlength="16" placeholder="(16-digit number)" [(ngModel)]="creditCardNumber">
+            <input type="text" name="creditCardNumber" required minlength="16" maxlength="16" (keypress)="keyPressNumbers($event)" placeholder="(16-digit number)" [(ngModel)]="creditCardNumber">
           </p>
           <P class="text-muted">NB: We'll never share your payment details with anyone else.</P>
-          <p>
-            <input type="submit" [disabled]="form.invalid" value="Confirm order" class="btn btn-primary">
-          </p>
+          <p><input type="submit" [disabled]="form.invalid" value="Confirm order" class="btn btn-primary"></p>
         </form>
       </div>
     </div>

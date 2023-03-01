@@ -32,5 +32,4 @@ export class CartService {
   clearCart(): void {
     this.cartProducts = [];
    }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product } from 'src/model/Product';
 import { ProductService } from '../services/product.service';
@@ -10,6 +10,7 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./product-item-detail.component.css']
 })
 export class ProductItemDetailComponent implements OnInit {
+  @Input() productItem!: Product;
   productsList: Product[] = [];
   product!: Product;
   id!: number;
@@ -39,6 +40,7 @@ export class ProductItemDetailComponent implements OnInit {
     this.cartService.addOrderToCart().subscribe(products => {
       this.productsList = products;
     });
+
   }
 
   getProductDetails(id: any) {
@@ -60,12 +62,13 @@ export class ProductItemDetailComponent implements OnInit {
       this.productService.addProduct(cartProducts);
     }
     this.selectedItem = '1';
+    const message = `${product.name} has been added to your cart.`;
+    alert(message);
     this.router.navigate(['/cart']);
   }
 
   onSubmit(product: Product): void {
-    const message = `${product.name} has been added to your cart.`;
-    alert(message);
+    this.addToCart(product);
   }
 
 }

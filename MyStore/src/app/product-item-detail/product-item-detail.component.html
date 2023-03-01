@@ -7,7 +7,7 @@
       <h2>{{ product.name }}</h2>
       <p>{{ product.description }}</p>
       <p>{{ product.price | currency: "USD" }}</p>
-      <form (ngSubmit)="onSubmit(product)">
+      <form #form="ngForm" (ngSubmit)="onSubmit(product)">
         <select class="select-input" [(ngModel)]="selectedItem" style="width: 100px" class="form-select" (ngModelChange)="selectedChange($event)" [ngModelOptions]="{ standalone: true }">
           <option *ngFor="let value of productCount" value="{{ value }}">
             {{ value }}

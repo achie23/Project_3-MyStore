@@ -17,6 +17,7 @@ export class CartComponent implements OnInit {
   fullName: string = '';
   address: string = '';
   creditCardNumber: string = '';
+  itemCount: number = 0;
 
   constructor(
     private cartService: CartService,
@@ -27,6 +28,7 @@ export class CartComponent implements OnInit {
     this.cartService.addOrderToCart().subscribe(products => {
       this.orderedProducts = products;
     });
+
     this.calculateTotal();
     this.checkIfCartIsEmpty();
   }
@@ -56,7 +58,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-  deletedItem(id: number) {
+  deleteItem(id: number) {
     const products = this.cartService.addOrderToCart();
     products.subscribe(
       () => {this.orderedProducts = this.orderedProducts.filter((product: Product) => product.id !== id)}
@@ -64,6 +66,7 @@ export class CartComponent implements OnInit {
     window.localStorage.clear();
     localStorage.setItem('products', JSON.stringify(products));
     this.calculateTotal();
+    alert("Item has been removed from cart");
   }
 
   clearCartBtn(): void {
@@ -86,5 +89,15 @@ export class CartComponent implements OnInit {
       totalAmount: this.totalAmount
     }
     this.cartService.addorderDetails(data);
+  }
+
+  keyPressNumbers(event: any) {
+    var charCode = (event.which) ? event.which : event.keyCode;
+    if ((charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+      return false;
+    } else {
+      return true;
+    }
   }
 }
